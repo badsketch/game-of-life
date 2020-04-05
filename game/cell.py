@@ -4,7 +4,7 @@ class CellState:
 
 class Cell:
 
-    def __init__(self, is_alive=False):
+    def __init__(self, is_alive: bool = False) -> None:
         self._is_alive = is_alive
 
     def __str__(self):
