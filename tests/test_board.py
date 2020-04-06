@@ -15,6 +15,12 @@ class Test_Board(unittest.TestCase):
         output_2 = '◻ ◻ ◻\n◻ ◻ ◻'
         self.assertMultiLineEqual(str(rectangular_board_2), output_2)
 
+    def test_generates_board_from_matrix(self):
+        matrix = [[0,0,0],[1,0,1],[1,1,1]]
+        board = Board(3, 3, matrix)
+        output = '◻ ◻ ◻\n◼︎ ◻ ◼︎\n◼︎ ◼︎ ◼︎'
+        self.assertMultiLineEqual(str(board), output)
+
     def test_refreshes_board_square(self):
         board = Board(3,3)
         new_state = [[0,0,0],[1,0,1],[1,1,1]]
@@ -22,21 +28,20 @@ class Test_Board(unittest.TestCase):
         board.set_new_state(new_state)
         self.assertMultiLineEqual(str(board), output)
     
-    def test_refreshes_board_rect(self):
+    def test_sets_new_board_state_rect(self):
         board = Board(5,3)
         new_state = [[0,1,1],[1,1,1],[0,1,0],[0,0,0],[1,1,1]]
         output = '◻ ◼︎ ◼︎\n◼︎ ◼︎ ◼︎\n◻ ◼︎ ◻\n◻ ◻ ◻\n◼︎ ◼︎ ◼︎'
         board.set_new_state(new_state)
         self.assertMultiLineEqual(str(board), output)
 
-    def test_refreshes_board_wrong_num_rows(self):
+    def test_sets_new_board_state_wrong_num_rows(self):
         board = Board(3,3)
         new_state = [[0,0,0],[1,0,1]]
         with self.assertRaisesRegex(Exception, 'new state does not match number of rows'):
             board.set_new_state(new_state)
         
-
-    def test_refreshes_board_wrong_num_cols(self):
+    def test_sets_new_board_state_wrong_num_cols(self):
         board = Board(3,3)
         new_state_1 = [[0,0],[1,1],[1,1]]
         with self.assertRaisesRegex(Exception, 'new state does not match number of columns'):
