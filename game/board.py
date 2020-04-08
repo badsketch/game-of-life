@@ -33,16 +33,76 @@ class Board:
 
     # determines neighbors given index including edge cases
     def get_neighbors_for_index(self, i: int, j: int) -> list:
-        return[
-            self._board[i - 1][j - 1],
-            self._board[i - 1][j],
-            self._board[i - 1][j + 1],
-            self._board[i][j - 1],
-            self._board[i][j + 1],
-            self._board[i + 1][j - 1],
-            self._board[i + 1][j],
-            self._board[i + 1][j + 1]
-        ]
+        if i == 0:
+            if j == 0:
+                return [
+                    self._board[i][j + 1],
+                    self._board[i + 1][j],
+                    self._board[i + 1][j + 1]
+                ]
+            elif j == len(self._board[0]) - 1:
+                return [
+                    self._board[i][j - 1],
+                    self._board[i + 1][j - 1],
+                    self._board[i + 1][j],
+                ]
+            else:
+                return [
+                    self._board[i][j - 1],
+                    self._board[i][j + 1],
+                    self._board[i + 1][j - 1],
+                    self._board[i + 1][j],
+                    self._board[i + 1][j + 1]
+                ]
+        elif i == len(self._board) - 1:
+            if j == 0:
+                return [
+                    self._board[i - 1][j],
+                    self._board[i - 1][j + 1],
+                    self._board[i][j + 1],
+                ]
+            elif j == len(self._board[0]) - 1:
+                return [
+                    self._board[i - 1][j - 1],
+                    self._board[i - 1][j],
+                    self._board[i][j - 1],
+                ]
+            else:
+                return [
+                    self._board[i - 1][j - 1],
+                    self._board[i - 1][j],
+                    self._board[i - 1][j + 1],
+                    self._board[i][j - 1],
+                    self._board[i][j + 1],
+                ]
+        else:
+            if j == 0:
+                return [
+                    self._board[i - 1][j],
+                    self._board[i - 1][j + 1],
+                    self._board[i][j + 1],
+                    self._board[i + 1][j],
+                    self._board[i + 1][j + 1]
+                ]   
+            elif j == len(self._board[0]) - 1:
+                return [
+                    self._board[i - 1][j - 1],
+                    self._board[i - 1][j],
+                    self._board[i][j - 1],
+                    self._board[i + 1][j - 1],
+                    self._board[i + 1][j],
+                ]
+            else:
+                return[
+                    self._board[i - 1][j - 1],
+                    self._board[i - 1][j],
+                    self._board[i - 1][j + 1],
+                    self._board[i][j - 1],
+                    self._board[i][j + 1],
+                    self._board[i + 1][j - 1],
+                    self._board[i + 1][j],
+                    self._board[i + 1][j + 1]
+                ]
         
 
     def set_new_state(self, new_state: list) -> None:
