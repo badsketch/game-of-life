@@ -25,11 +25,14 @@ class Board:
 
     def calculate_next_state_for_index(self, i: int, j: int) -> bool:
         neighbors = self.get_neighbors_for_index(i, j)
-        live_count = len([n.is_alive for n in neighbors if n])
+        live_count = len([n for n in neighbors if n.is_alive])
         if live_count < 2 or live_count > 3:
             return False
         else:
-            return True
+            if self._board[i][j].is_alive:
+                return True
+            else:
+                return False
 
     # determines neighbors given index including edge cases
     def get_neighbors_for_index(self, i: int, j: int) -> list:
