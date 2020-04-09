@@ -55,11 +55,11 @@ class Test_Board(unittest.TestCase):
         with self.assertRaisesRegex(Exception, 'new state does not match number of columns'):
             board.set_new_state(new_state_3)
 
-    def test_calculates_next_board_stage(self):
+    def test_calculates_next_board_state(self):
         seed_state = [[1,0,0],[0,1,0],[0,0,0]]
         board = Board(3, 3, seed_state)
-        board.calculate_next_state_for_index(1,1)
-        next_state_output = '◼︎ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
+        board.calculate_next_board_state()
+        next_state_output = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
         self.assertMultiLineEqual(str(board), next_state_output)
 
     # ------------------TEST GAME OF LIFE LOGIC-------------------------------------

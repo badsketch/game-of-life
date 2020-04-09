@@ -23,16 +23,24 @@ class Board:
             result += '\n' if i < self._nrows - 1 else ''
         return result
 
+    def calculate_next_board_state(self):
+        new_state = [[False for j in range(self._ncols)] for i in range(self._nrows)]
+        # calculate the next state for each index
+        for i in range(self._nrows):
+            for j in range(self._ncols):
+                new_state[i][j] = self.calculate_next_state_for_index(i,j)
+        self.set_new_state(new_state)
+
     def calculate_next_state_for_index(self, i: int, j: int) -> bool:
         neighbors = self.get_neighbors_for_index(i, j)
         live_count = len([n for n in neighbors if n.is_alive])
         if live_count < 2 or live_count > 3:
             return False
         else:
-            if self._board[i][j].is_alive:
-                return True
-            else:
+            if not self._board[i][j].is_alive and live_count == 2:
                 return False
+            else:
+                return True
 
     # determines neighbors given index including edge cases
     def get_neighbors_for_index(self, i: int, j: int) -> list:
