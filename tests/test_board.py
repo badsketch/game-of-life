@@ -55,12 +55,44 @@ class Test_Board(unittest.TestCase):
         with self.assertRaisesRegex(Exception, 'new state does not match number of columns'):
             board.set_new_state(new_state_3)
 
-    def test_calculates_next_board_state(self):
+    def test_calculates_next_board_state_1(self):
         seed_state = [[1,0,0],[0,1,0],[0,0,0]]
         board = Board(3, 3, seed_state)
         board.calculate_next_board_state()
-        next_state_output = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
-        self.assertMultiLineEqual(str(board), next_state_output)
+        cycle_1 = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
+        self.assertMultiLineEqual(str(board), cycle_1)
+        board.calculate_next_board_state()
+        cycle_2 = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
+        self.assertMultiLineEqual(str(board), cycle_2)
+
+    def test_calculates_next_board_state_2(self):
+        seed_state = [[1,0,0], [0,1,0], [1,1,1]]
+        board = Board(3,3, seed_state)
+        board.calculate_next_board_state()
+        cycle_1 = '◻ ◻ ◻\n◻ ◻ ◼︎\n◼︎ ◼︎ ◼︎'
+        self.assertMultiLineEqual(str(board), cycle_1)
+        board.calculate_next_board_state()
+        cycle_2 = '◻ ◻ ◻\n◻ ◻ ◼︎\n◻ ◼︎ ◼︎'
+        self.assertMultiLineEqual(str(board), cycle_2)
+        board.calculate_next_board_state()
+        cycle_3 = '◻ ◻ ◻\n◻ ◼︎ ◼︎\n◻ ◼︎ ◼︎'
+        self.assertMultiLineEqual(str(board), cycle_3)
+        board.calculate_next_board_state()
+        cycle_4 = '◻ ◻ ◻\n◻ ◼︎ ◼︎\n◻ ◼︎ ◼︎'
+        self.assertMultiLineEqual(str(board), cycle_4)
+
+
+    def test_calculate_next_board_state_3(self):
+        seed_state = [[1,1,1], [1,1,1], [1,1,1]]
+        board = Board(3,3, seed_state)
+        board.calculate_next_board_state()
+        cycle_1 = '◼︎ ◻ ◼︎\n◻ ◻ ◻\n◼︎ ◻ ◼︎'
+        self.assertMultiLineEqual(str(board), cycle_1)
+        board.calculate_next_board_state()
+        cycle_2 = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
+        self.assertMultiLineEqual(str(board), cycle_2)
+
+
 
     # ------------------TEST GAME OF LIFE LOGIC-------------------------------------
     # underpopulation
