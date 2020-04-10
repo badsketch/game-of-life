@@ -4,18 +4,19 @@ from .cell import Cell
 
 class Board:
     
-    def __init__(self, num_rows: int, num_cols: int, matrix: list = None) -> None:
+    def __init__(self, matrix: list = None) -> None:
         self._cycles = 0
-        self._nrows = num_rows
-        self._ncols = num_cols
-        self._board = [[Cell() for j in range(self._ncols)] for i in range(self._nrows)]
-        if matrix and self._is_correct_shape(matrix):
+        self._nrows = len(matrix)
+        self._ncols = len(matrix[0])
+        if self._is_correct_shape(matrix):
+            self._board = [[Cell() for j in range(self._ncols)] for i in range(self._nrows)]
             for i in range(self._nrows):
                 for j in range(self._ncols):
                     if matrix[i][j]:
                         self._board[i][j] = Cell(is_alive=True)
                     else:
                         self._board[i][j] = Cell()
+
 
     def __str__(self) -> None:
         result = ''
