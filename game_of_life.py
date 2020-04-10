@@ -1,4 +1,11 @@
 from game.board import Board
 
-board = Board(4,5)
-print(board)
+seed = []
+
+with open('./seeds/gun.txt', 'r') as f:
+    for line in f.readlines():
+        seed.append([int(cell) for cell in line.rstrip().split(' ')])
+
+board = Board(3,3,seed)
+board.play()
+

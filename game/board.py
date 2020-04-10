@@ -1,3 +1,5 @@
+import os
+from time import sleep
 from .cell import Cell
 
 class Board:
@@ -145,3 +147,13 @@ class Board:
     # TODO
     def kill_at_index(self, row: int, col: int) -> None:
         self._board[row][col].live()
+
+    def play(self) -> None:
+        while True:
+            self.calculate_next_board_state()
+            print('CYCLE: ', self._cycles)
+            print('\n')
+            print(self.__str__())
+            sleep(0.2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+
