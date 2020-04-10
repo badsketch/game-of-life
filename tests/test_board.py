@@ -64,6 +64,7 @@ class Test_Board(unittest.TestCase):
         board.calculate_next_board_state()
         cycle_2 = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
         self.assertMultiLineEqual(str(board), cycle_2)
+        self.assertEqual(board._cycles, 2)
 
     def test_calculates_next_board_state_2(self):
         seed_state = [[1,0,0], [0,1,0], [1,1,1]]
@@ -80,6 +81,7 @@ class Test_Board(unittest.TestCase):
         board.calculate_next_board_state()
         cycle_4 = '◻ ◻ ◻\n◻ ◼︎ ◼︎\n◻ ◼︎ ◼︎'
         self.assertMultiLineEqual(str(board), cycle_4)
+        self.assertEqual(board._cycles, 4)
 
 
     def test_calculate_next_board_state_3(self):
@@ -91,6 +93,7 @@ class Test_Board(unittest.TestCase):
         board.calculate_next_board_state()
         cycle_2 = '◻ ◻ ◻\n◻ ◻ ◻\n◻ ◻ ◻'
         self.assertMultiLineEqual(str(board), cycle_2)
+        self.assertEqual(board._cycles, 2)
 
 
     
