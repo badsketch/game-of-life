@@ -1,6 +1,6 @@
 class CellState:
-    DEAD = '◻'
-    ALIVE = '◼︎'
+    DEAD = '🌚'
+    ALIVE = '🌝'
 
 class Cell:
 
