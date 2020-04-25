@@ -48,78 +48,13 @@ class Board:
                 return True
 
     # determines neighbors given index including edge cases
-    def get_neighbors_for_index(self, i: int, j: int) -> list:
-        if i == 0:
-            if j == 0:
-                return [
-                    self._board[i][j + 1],
-                    self._board[i + 1][j],
-                    self._board[i + 1][j + 1]
-                ]
-            elif j == len(self._board[0]) - 1:
-                return [
-                    self._board[i][j - 1],
-                    self._board[i + 1][j - 1],
-                    self._board[i + 1][j],
-                ]
-            else:
-                return [
-                    self._board[i][j - 1],
-                    self._board[i][j + 1],
-                    self._board[i + 1][j - 1],
-                    self._board[i + 1][j],
-                    self._board[i + 1][j + 1]
-                ]
-        elif i == len(self._board) - 1:
-            if j == 0:
-                return [
-                    self._board[i - 1][j],
-                    self._board[i - 1][j + 1],
-                    self._board[i][j + 1],
-                ]
-            elif j == len(self._board[0]) - 1:
-                return [
-                    self._board[i - 1][j - 1],
-                    self._board[i - 1][j],
-                    self._board[i][j - 1],
-                ]
-            else:
-                return [
-                    self._board[i - 1][j - 1],
-                    self._board[i - 1][j],
-                    self._board[i - 1][j + 1],
-                    self._board[i][j - 1],
-                    self._board[i][j + 1],
-                ]
-        else:
-            if j == 0:
-                return [
-                    self._board[i - 1][j],
-                    self._board[i - 1][j + 1],
-                    self._board[i][j + 1],
-                    self._board[i + 1][j],
-                    self._board[i + 1][j + 1]
-                ]   
-            elif j == len(self._board[0]) - 1:
-                return [
-                    self._board[i - 1][j - 1],
-                    self._board[i - 1][j],
-                    self._board[i][j - 1],
-                    self._board[i + 1][j - 1],
-                    self._board[i + 1][j],
-                ]
-            else:
-                return[
-                    self._board[i - 1][j - 1],
-                    self._board[i - 1][j],
-                    self._board[i - 1][j + 1],
-                    self._board[i][j - 1],
-                    self._board[i][j + 1],
-                    self._board[i + 1][j - 1],
-                    self._board[i + 1][j],
-                    self._board[i + 1][j + 1]
-                ]
-        
+    def get_neighbors_for_index(self, row: int, col: int) -> list:
+        neighbors = []
+        for i in range(row - 1, row + 2):
+            for j in range(col - 1, col + 2):
+                if 0 <= i < self._nrows and 0 <= j < self._ncols and not(i == row and j == col):
+                    neighbors.append(self._board[i][j])
+        return neighbors
 
     def set_new_state(self, new_state: list) -> None:
         if self._is_correct_shape(new_state):
